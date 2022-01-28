@@ -1,11 +1,16 @@
 # CouchDB Cloudron README
 
 CouchDB Cloudron docker app ready to deploy.
-Available also as docker-image ready for Cloudron deploy from docker-hub: (Docker Hub Image)[https://hub.docker.com/r/terapolis/cloudron-couchdb]
+Available also as docker-image ready for Cloudron deploy from docker-hub: [Docker Hub Image](https://hub.docker.com/r/terapolis/cloudron-couchdb)
 
 - Cloudron `proxyAuth` authentication layer on path `/_utils` for extendeed security
 - CouchDB configuration on `default.ini` file available on cloudron file manager under `app/data` folder
 - Ready for CORS on `localhost` and `localhost:4200`
+
+![Cloudron Application](cloudron-app-couchdb.jpg)
+
+![Cloudron Filemanager](cloudron-filemanager-couchdb.jpg)
+
 
 ### IMPORTANT! ADMINISTRATION PASSWORD
 IMPORTANT! Change `administrator=password123` from default.ini file. Password will be auto-encrypted on first run.
