@@ -1,6 +1,6 @@
 # CouchDB Cloudron README
 
-CouchDB Cloudron docker app reeady to deploy.
+CouchDB Cloudron docker app ready to deploy.
 Available also as docker-image ready for Cloudron deploy from docker-hub: (Docker Hub Image)[https://hub.docker.com/r/terapolis/cloudron-couchdb]
 
 - Cloudron `proxyAuth` authentication layer on path `/_utils` for extendeed security
