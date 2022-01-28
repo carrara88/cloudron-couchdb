@@ -7,29 +7,27 @@ Available also as docker-image ready for Cloudron deploy from docker-hub: [Docke
 - CouchDB configuration on `default.ini` file available on cloudron file manager under `app/data` folder
 - Ready for CORS on `localhost` and `localhost:4200`
 
-![Cloudron Application](cloudron-app-couchdb.jpg)
-
-![Cloudron Filemanager](cloudron-filemanager-couchdb.jpg)
-
 
 ### IMPORTANT! ADMINISTRATION PASSWORD
 IMPORTANT! Change `administrator=password123` from default.ini file. Password will be auto-encrypted on first run.
 
-## Build dockerfile image
+## Build dockerfile image (example)
 
 To build dockerfile image from source files run:
 ```
-docker build -t your-docker-user/cloudron-couchdb .
+docker build -t example-dockerhub-user/cloudron-couchdb .
 ```
 
 To push docker image into docker-hub from source files run:
 ```
-docker push your-docker-user/cloudron-couchdb
+docker push example-dockerhub-user/cloudron-couchdb
 ```
 ## Install on Cloudron from Docker-Hub with Cloudron CLI
 To install docker image into cloudron from docker-hub run:
  ```
-cloudron install --image your-docker-user/cloudron-couchdb
+cloudron install --image example-dockerhub-user/cloudron-couchdb
 ```
 
+![Cloudron Application](cloudron-app-couchdb.jpg)
 
+![Cloudron Filemanager](cloudron-filemanager-couchdb.jpg)
