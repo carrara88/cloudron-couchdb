@@ -1,10 +1,14 @@
 # CouchDB Cloudron README
 
-CouchDB Cloudron docker app to deploy DB with Fauxton.
+CouchDB Cloudron docker app reeady to deploy.
+Available also as docker-image ready for Cloudron deploy from docker-hub: (Docker Hub Image)[https://hub.docker.com/r/terapolis/cloudron-couchdb]
 
-- Cloudron authentication on Fauxton path "/_utils"
-- CouchDB configuration on default.ini file
+- Cloudron `proxyAuth` authentication layer on path `/_utils` for extendeed security
+- CouchDB configuration on `default.ini` file available on cloudron file manager under `app/data` folder
+- Ready for CORS on `localhost` and `localhost:4200`
 
+### IMPORTANT! ADMINISTRATION PASSWORD
+IMPORTANT! Change `administrator=password123` from default.ini file. Password will be auto-encrypted on first run.
 
 ## Build dockerfile image
 
