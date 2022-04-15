@@ -1,4 +1,5 @@
 # CouchDB Cloudron README
+CouchDB 3.2.1 - Licensed under the Apache License 2.0 Apache CouchDB, CouchDB, and the project logo are trademarks of The Apache Software Foundation
 
 CouchDB Cloudron docker app ready to deploy.
 Available also as docker-image ready for Cloudron deploy from docker-hub: [Docker Hub Image](https://hub.docker.com/r/terapolis/cloudron-couchdb)

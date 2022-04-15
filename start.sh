@@ -12,11 +12,12 @@
 # the License.
 
 set -eu
-# ensure that data directory is owned by 'cloudron' user
-chown -R cloudron:cloudron /app/data
+sed -e "s,##APP_DOMAIN##,${CLOUDRON_APP_DOMAIN}," /app/code/nginx.conf  > /run/nginx.conf
+
+
 
 echo "==> Starting supervisor"
-exec /usr/bin/supervisord --configuration /etc/supervisor/supervisord.conf --nodaemon -i PouchDBApp
+exec /usr/bin/supervisord --configuration /etc/supervisor/supervisord.conf --nodaemon -i CouchDBApp
 # cloudron supervisor instead
 #echo "==> Starting couchdb"
 #exec /opt/couchdb/bin/couchdb -couch_ini /app/data/default.ini

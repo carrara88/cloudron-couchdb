@@ -25,25 +25,6 @@ RUN chown -R cloudron:cloudron /app/data
 #WORKDIR /app/code
 ######################################################### DIRECTORIES (end)
 
-#1
-######################################################### FILES (start)
-RUN echo "2 WEBAPP (start-deploy)"
-# copy code
-COPY start.sh /app/code/
-
-COPY prod.sh /app/code/
-RUN chmod +x /app/code/prod.sh
-
-COPY default.ini /app/data/default.ini
-
-ADD supervisor/* /etc/supervisor/conf.d/
-RUN ln -sf /run/supervisord.log /var/log/supervisor/supervisord.log
-# copy code
-COPY dist/ /app/code/
-# lock www-data but allow su - www-data to work
-RUN passwd -l www-data && usermod --shell /bin/bash --home /app/data www-data
-######################################################### FILES (end)
-
 
 
 
@@ -137,16 +118,61 @@ RUN set -eux; \
 ######################################################### COUCHDB (end)
 
 
+
+#1
+######################################################### FILES (start)
+RUN echo "2 WEBAPP (start-deploy)"
+# copy code
+COPY start.sh /app/code/
+
+
+#production run
+COPY prod.sh /app/code/
+RUN chmod +x /app/code/prod.sh
+
+#default couchdb configuration
+COPY default.ini /app/data/default.ini
+
+COPY supervisor/app.conf /etc/supervisor/conf.d/app.conf
+COPY supervisor/nginx.conf /etc/supervisor/conf.d/nginx.conf
+
+RUN ln -sf /run/supervisord.log /var/log/supervisor/supervisord.log
+# copy code
+COPY dist/ /app/code/
+# lock www-data but allow su - www-data to work
+RUN passwd -l www-data && usermod --shell /bin/bash --home /app/data www-data
+######################################################### FILES (end)
+
+
+
+
+######################################################### nginxs (start)
+# add nginx config
+
+#RUN rm /etc/nginx/sites-enabled/*
+
+
+COPY nginx.conf /app/code/nginx.conf
+COPY nginx_readonlyrootfs.conf /etc/nginx/conf.d/readonlyrootfs.conf
+
+# ensure that data directory is owned by 'cloudron' user
+RUN chown -R cloudron:cloudron /app/code
+RUN chown -R cloudron:cloudron /app/data
+RUN chown -R cloudron:cloudron /run
+#RUN sed -e "s,##APP_DOMAIN##,${CLOUDRON_APP_DOMAIN}," /app/code/nginx.conf  > /run/nginx.conf
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
+
 #start couchdb
-ENTRYPOINT ["/tini", "--", "/app/code/start.sh"]
+#ENTRYPOINT ["/tini", "--", "/app/code/start.sh"]
 #fix startup single node missing tables
-CMD /app/code/prod.sh
+
 
 #VOLUME /app/data
-
 # 5984: Main CouchDB endpoint
 # 4369: Erlang portmap daemon (epmd)
 # 9100: CouchDB cluster communication port
-EXPOSE 5984 4369 9100
+EXPOSE 5984 4369 9100 8000 3000
 #CMD ["/opt/couchdb/bin/couchdb -couch_ini /app/data/default.ini" ]
-
+CMD ["/app/code/start.sh","/app/code/prod.sh"]

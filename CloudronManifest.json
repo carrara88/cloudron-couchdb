@@ -1,14 +1,16 @@
 {
-  "id": "pro.carrara.couchdb",
+  "id": "org.apache.couchdb",
   "title": "CouchDB",
   "author": "The Apache Software Foundation",
-  "description": "CouchDB 3.2.1 - Licensed under the Apache License 2.0 Apache CouchDB, CouchDB, and the project logo are trademarks of The Apache Software Foundation",
+  "description": "file://README.md",
+  "postInstallMessage": "file://POSTINSTALL.md",
+  "documentationUrl": "https://docs.couchdb.org/",
   "website": "https://couchdb.apache.org/",
   "icon": "file://icon.png",
   "tags": [ "DB", "json", "CouchDB", "Apache" ],
   "version": "3.2.1",
   "healthCheckPath": "/",
-  "httpPort": 5984,
+  "httpPort": 8000,
   "addons": {
     "proxyAuth":{ "path": "/_utils" },
     "localstorage": {}

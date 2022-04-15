@@ -2,3 +2,9 @@ test/*
 .git/*
 cloudron-filemanager-couchdb.jpg
 cloudron-app-couchdb.jpg
+.git
+.gitignore
+.dockerignore
+node_modules
+test
+screenshots
